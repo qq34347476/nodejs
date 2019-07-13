@@ -1,0 +1,122 @@
+作业： 
+    1 完成上课的 英雄列表和添加
+    2 继续完成  删除   软删除 英雄
+    3 写一个heroinfo.html  当双击英雄tr的时候 跳转到heroinfo.html页面并且显示当前英雄信息
+    4 继续完成  编辑  弹出一个框 实现编辑
+
+
+
+
+
+
+1 增删改查  create delete update select(read)
+  curd
+
+2 isdel 是否删除  0代表正常 1代表  删除了
+  软删除： 数据还在 只是修改了 成1 代表删除了 
+  真正删除： delete  数据不容易恢复
+
+3 路由两种方式
+    1. 简单 直接app.get这样
+    2   复杂方式
+         1. 新建一个js 导出router
+         2 在用的地方 引入router并且use
+
+
+4 拆分文件
+   1 文件结构清晰 每个文件都有自己做的事
+   2 代码 可以重复使用  其他文件要使用 直接导入 对应的文件就行了
+
+
+5 semantic 和bootstrap一样
+  1.引入他的css 或者js
+  2 复制 他的 html结构
+  3 样式不符合 就自己写样式去覆盖就行
+
+6  cors 跨域资源共享
+   后台需要设置一个 header 允许所有人跨域
+
+ nodejs有这个cors包
+   1 npm i cors -S
+   2 引入并且use
+        const cors=require("cors")
+	app.use( cors() )
+
+
+7 1 。引入css 或js
+  2   复制结构
+  3   改结构 改样式
+  4  实在找不到 就换一个 或者自己写
+
+模态框 
+媒体列表 
+
+
+
+
+
+
+
+
+
+
+
+
+7 arttemplate模板引擎
+
+template-web.js 原生和简洁都支持
+ 
+  1 引入模板引擎的js
+  2 写一个模板
+  <script type="text/template" id="模板id">
+
+  </script>
+  3 template 拼接出一个完整的html  template("模板id",数据对象)
+            let html=template("heroTpl",res);//模板用的是 对象的 属性名字        
+  4 把拼接出来html显示到页面上 
+            $("#tbd").html(html)
+
+
+ 
+value 数组的每一项
+index 索引
+
+ {{each 数组 as value index }}
+     
+
+ {{/each}}
+----------------------其他写法
+ {{each 数组}}
+     
+
+ {{/each}}
+默认 有一个 $value 是数组的每一项
+            $index 是索引
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,190 @@
+
+
+注意： 1 以前学的sql(所有语言都可以用) nodejs还是可以使用的 
+       2 nodejs 还有自己规定了其他的写法 (使用nodejs写法 只能nodejs 专用 其他语言不能) 
+
+注意： conn.query("sql语句", 数据参数, 成功后的函数)
+       数据参数 : 1 没有? 直接不写参数  
+                  2 一个? 写一个参数
+                  3 多个?  写数组 从左到右 一一对应?
+
+
+-----今日代码
+
+  1 中间件 ： 代码从开始 到 结束  中间会执行的函数 
+
+  2 中间件的分类 
+   	1 应用级别的中间件 写在app上
+   	2 路由级别的中间件  写在router上
+   	3 错误中间件       处理错误
+  	4 内置中间件     express 自带的 
+  	5 第三方中间件   别人写好的 你可以下载来用
+
+  3 中间件: 是一个函数 一般 app.use(函数)
+  //     0 中间件一定有req,res,next 规定有的
+  //     1 所有请求 开始到结束之间  一定会执行
+  //     2 一定要  next() 告诉他下一个
+  //     3 在nodejs里面所有 req res 都是同一个  是对象 前面的req res后面都是一样的
+      
+
+  4 哪些代码 合适写在中间件？
+   一些公共代码 后面有可能都要用到的 代码 
+   
+   比如：
+    // 访问每一个页面的时候  记录一下 今天几点钟 访问了页面  今天总共有多少人访问 
+ 
+
+5  nodejs数据库操作
+
+  //  1 下载mysql并引入
+     const mysql=require("mysql")
+  //  2  连接数据库
+    const conn=mysql.createConnection({
+    	 host:"localhost",
+   	 user:"root",
+    	 password:"root",
+   	 database:"mysql_001"
+     })
+  //  3  调用query执行sql语句
+  // conn.query("sql语句", 数据参数, 成功后的函数)
+
+
+ 注意： 1 以前学的sql(所有语言都可以用) 是可以使用的 
+        2 nodejs 还有其他的写法(使用nodejs写法 只能nodejs 专用 其他语言不能) 
+
+注意： conn.query("sql语句", 数据参数, 成功后的函数)
+// 数据参数 : 1 没有? 直接不写参数  
+//           2 一个? 写一个参数
+//           3 多个?  写数组 从左到右 一一对应?
+
+5 nodejs专用 sql
+
+
+  增加 新增： insert into users表  set ?
+
+  删除： delete from users表  where id=?
+
+  修改 更新： update users表 set ? where id=?
+
+  查询  select * from users表
+
+  查询对应id数据  select * from users表 where id=?
+
+
+浏览器缓存
+    1 缓存 浏览器会把第一次代码存起来 下次你再请求同一个地址 他就直接在浏览器拿出存的那个代码
+   
+       如果你新修改了代码 因为每次都拿上一次缓存的代码  你的新代码永远不会生效
+
+    2 每次取请求最新的代码  才会每次都是最新的代码 
+
+    3 强制刷新就行  ctrl+f5
+
+
+6  模块 require 只会执行一次  后面都是取缓存  代码不需要重复了、
+     
+   核心模块：  nodejs自带 你安装了nodejs 就有 require('fs')
+    
+   加载自己写的用户模块 ： index -> index.js ->index.json-> index.node -》都没有就报错
+
+   npm下载第三方模块：只要下载 require(名字) 就会自动去node_modules找
+                      当前找不到 向上一级文件夹找 最后找不到报错
+
+
+7 get 请求 和post请求
+  
+  php  get请求参数  使用 $_GET
+       post请求参数      $_POST   上传文件 $_FILES
+
+
+get   请求   一般 获取数据
+post  请求   一般提交数据 
+put   请求   一般 修改数据
+delete请求   一般删除
+
+8 nodejs 怎么获取对应参数
+
+      1 get 直接在地址后面拼接 ?这种
+  
+           http://localhost:3001/user?name=zs&age=18
+          怎么获取？
+               req.query  --->  { name: 'zs', age: '18' }
+               req.query.name -->zs'
+
+      2  路径参数  get
+
+             /user/100/ls           
+            
+             /user/:id/:name    --》id对应100 name对应ls
+            req.params--》 { id: '100', name: 'ls' }
+            req.params.id--->100
+      3 post 参数
+
+         1 下载 npm i body-parser -S
+         2 引入并且app.use  
+         3 使用req.body 获取参数  -》{ name: '小黑', age: '18', gender: '男' }
+         
+          
+
+
+postman -> body->x-www-form-urlencoded 选这个写参数
+  
+9 开发方式
+  1  混合开发(php nodejs 前端html 混在一起写)
+     
+     全干了
+
+  2 前后端分离
+       前端写 html css js  发送ajax
+
+       后台 操作数据库 给你数据
+
+
+10 跨域问题？
+   协议域名端口 只要任意一个不一样 就会 跨域
+ 
+  2 解决跨域
+       1， 服务器后台 设置 header 允许所有人跨域 (cors跨域共享)
+       2 jsonp
+  3  
+       jsonp 使用 script src 发送请求 只能发送get
+       
+       后台允许跨域(cors)  可以是 get和post
+
+ 月份 dt.getMonth()  0-11 少1   加1就是中国
+
+
+//获取提交的 post 参数 配合body-parser
+    // console.log(req.body) // { name: '亚索', gender: '男' }
+    // 字符串.padStart(2,'0') 长度为2 不满足就在前面补0 
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

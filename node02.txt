@@ -1,0 +1,171 @@
+重点：
+    fs 文件操作  
+      1. const fs=require("fs")
+      读 fs.readFile
+      写 fs.writeFile
+
+      次要
+      	追加 fs.appendFile
+      	复制  fs.copyFile
+      	删除  fs.unlink
+
+
+    path
+          path.join 可以非常智能拼接 你传的路径 比你自己手动拼接 更加好
+         总结： 以后凡是 路径  尽量path.join( ) 配合__dirname 拼接  不容易出错
+
+了解
+
+  path.sep    window系统 \  linux系统  /
+  path.basename()   文件名
+  path.dirname()  文件在的路径
+  path.extname()  后缀名
+
+
+
+作业：1 尝试完成 作业文件夹的 my18 my19
+      2 百度 nodejs模块化
+
+
+
+
+
+
+
+--------------------------------------------------------------------------------------------------
+
+
+同步   代码从上往下执行  遇见同步 会一直等着 直到执行完 才继续往下
+      一直等  
+
+异步  代码从上往下执行  遇见异步  不等了 我先走了 你去执行你的
+      不会等 你做你的  我先走了
+
+异步 效率高 
+
+
+哪些是异步？》
+   定时器 ajax     fs文件操作
+
+
+
+
+
+
+
+1 nodejs  是一个运行环境  他可以让javascript 像php 这些后端语言一样
+                        操作数据库这些。。。
+
+2 前端js组成： ecmascript核心(if for这些语法)  + dom  +bom     
+
+  nodejs组成： ecmascript核心(if for这些语法) +  全局成员 +核心模块   
+
+
+3 运行nodejs 必须打开命令窗口(终端)
+   1 进入文件夹 shift+右键  打开..窗口  node xxx.js 回车 执行
+   2 vscode 在文件夹上面 右键 在终端打开   node xxx.js 回车 执行
+
+注意：  不管怎么打开 你都要保证 在对应的文件夹 有对应的js
+
+4  var let const
+   var let 都可以声明变量
+       let 1 必须先声明 再使用  2  let 有{}作用域 有{}里面的let 那么 只能在{}里面用 外面不行  （if for while function ...）
+       const 常量 和let 差不多  3 值第一次声明之后就永远不能改了
+
+
+经常用let  偶尔用const  不能用var(太low了)
+
+
+5 解构赋值
+      解构赋值   { 属性名1,属性名2... }= 对象    从对象里面直接拿出属性来用
+      name:abc    把name改成abc名字 改了之后  原来就不能用了
+
+      let { name,age  }=person;//
+
+6  箭头函数  ()=>{  }
+
+   写法    let add= ()=>{ 
+		
+           }
+
+     1 如果 () 只有一个参数 () 可以省略
+     2 如果 {} 里面只有一句代码 那么{} 可以省略
+     3 如果()只有一个参数 {}只有一行代码 都可以省略
+
+7 对象的简写方式
+  let name="zs"
+  let obj={
+    // 属性名: 属性值
+    name,// 相当于写 name:name变量  ---> name:"zs"
+    age,
+    show,
+    say(){// say:函数
+        console.log("我是say")
+    }
+}
+
+
+nodejs组成  ： ecmascript核心(if for这些语法) +全局成员  +核心模块(核心api成员)
+
+
+8 核心模块(核心api成员)  ：  nodejs安装了就自带了
+
+
+9 fs 文件操作  
+   1. const fs=require("fs")
+
+10 路径 要注意 拼接一个完整的路径
+    ./ 是相对于 你执行node的那个命令目录 来说的
+               例子 在e盘执行node  ./就相当于e盘
+            // PS E:\>
+	    // 读取出错ENOENT: no such file or directory, open 'E:\files\abc.txt'
+
+11 解决路径问题
+   1.  __dirname 永远是 你的js文件所在的 文件夹  从盘符开始 绝对正确的路径
+       注意：以后文件路径 最好就拼接出一个 完整的绝对路径
+        __dirname  --------> D:\1传智上课\node\stu_my_node-mymymymy\day1
+
+     __dirname+'/files/abc.txt'  --> D:\1传智上课\node\stu_my_node-mymymymy\day1/files/abc.txt
+
+12 __dirname 与__filename  两个下划线
+
+  __dirname ： 你的js文件所有在的文件夹 
+  D:\1传智上课\node\stu_my_node-mymymymy\day1
+
+  __filename : js所有在的文件夹+文件名字
+  D:\1传智上课\node\stu_my_node-mymymymy\day1/my6读取文件.js
+
+13  数组 arr.forEach  方法 js原生就有的
+
+   arr.forEach(function(item,i){//item数组的每一项 i数组的索引
+       console.log(i)
+   })
+   dataStr.split(" ");//以空格拆分字符串变成 数组
+   item.replace("=", "：");//找到= 替换成： 返回替换后的字符串
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

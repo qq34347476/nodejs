@@ -1,0 +1,89 @@
+
+
+注意：nodejs 很弱智 对应的html css js等等  你必须手动写代码读出来 返回 才行
+      所以你再用nodejs的时候 需要写很多if判断读取对应的文件返回
+      很麻烦
+
+
+1. req.url
+   拿到的是3000 后面 包括/在内的所有地址 没有写默认 /
+
+2  判断url 地址 返回不同的页面
+
+    // 判断你请求什么页面就给你对应的页面
+    // 二进制buf 不需要 设置头部了  浏览器也可以自动认识
+
+
+3 
+ // 你访问的地址 必须 恰好 有一个对应文件  就规定死了 你必须故意写一个地址 正好对应一个文件才可以
+    fs.readFile( path.join(__dirname,url),(err,buf)=>{
+        if(err) return console.log("读取错误"+err.message)
+        // console.log(buf)
+        res.end(buf);// 把读到的页面内容返回给浏览器
+    })
+
+4  express框架   koa框架  egg框架
+
+express
+  1. npm i express -S
+  2  require("express")
+  3  看文档使用
+
+5 静态资源文件
+     前端 html js css 图片 等等 就叫静态资源
+  托管静态资源文件 : 让你可以直接访问前端 html css js 图片 文件
+	app.use( express.static("./views")  );//直接到views文件夹里面了 直接就访问到views文件夹里面的所有文件
+// app.use( "/page" ,express.static("./views") );// 必须 /page  才能到views文件夹里面 可以访问里面的所有文件
+// app.use( "/abc" ,express.static("./views") );//  /abc  就到views文件夹里面了 可以访问里面的所有文件
+
+// 特别注意：你写的 什么 /地址  那么就对应好就行 
+
+6 ejs 模板引擎
+  1. 下载 npm i ejs -S
+  2  app.set 配置好
+  3  res.render(模板文件,{数据}) 渲染对应页面
+
+7 路由模块
+
+ 路由： 一个请求的地址  对应 会返回内容给你
+ 
+ express中路由写法
+ // 1 路由写法 简单的 app.get()  请求一个地址返回一个对应的内容
+ // 2 路由写法 复杂写法  (常用) 
+//    1 必须新建新的.js导出router 
+      			 const express=require("express")
+			// 创建router对象
+			const router=express.Router()
+
+			// 监听对应的请求
+			router.get("/",(req,res)=>{
+   				 res.send("你好 首页")
+			})
+
+
+			// 导出 router
+			module.exports=router
+
+       2 引入那个router
+	const router=require("./myrouter.js")
+	app.use(router)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
